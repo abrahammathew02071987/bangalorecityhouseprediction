@@ -1,9 +1,14 @@
-version: '3.7'
+version: '2'
+
 networks:
   my-network:
+
 services:
-  nginx:
-    build: ./nginx
+  nginx: 
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: nginx:tag
     container_name: nginx
     restart: always
     ports:
@@ -13,14 +18,18 @@ services:
     depends_on:
       - bhp
     
-  bhp:
-    build: ./flask
+
+  bhp: 
+    build:
+      context: ./flask
+      dockerfile: Dockerfile
+    image: bhp:tag
     container_name: bhp
     restart: always
     ports:
       - "5000:5000"
     networks:
-      - my-network
+      - my-network   
   
 
 
