@@ -1,0 +1,27 @@
+version: '3.7'
+networks:
+  my-network:
+services:
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - my-network
+    depends_on:
+      - bhp
+    
+  bhp:
+    build: ./flask
+    container_name: bhp
+    restart: always
+    ports:
+      - "5000:5000"
+    networks:
+      - my-network
+  
+
+
+
